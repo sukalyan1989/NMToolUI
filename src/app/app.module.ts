@@ -3,14 +3,23 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
+
+import { MachineTableComponent } from './machine-table/machine-table.component';
+import { MatTableModule } from '@angular/material';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MachineTableComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
