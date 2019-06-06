@@ -20,9 +20,9 @@ export class MachinesService {
   }).pipe(map(n =>{ return n;}))
   }
 
-  public getMachineById( id:number):Observable<Object>{
+  public getMachineById(id:number):Observable<MachineDetails>{
 
-    return this.http.get("http://localhost:64689/api/MachineDetails/"+id,{
+    return this.http.get<MachineDetails>("http://localhost:64689/api/MachineDetails/"+id,{
     headers: new HttpHeaders({
       Accept: "application/json;odata=verbose",
     })
@@ -30,6 +30,8 @@ export class MachinesService {
 
   }
 }
+
+
 export interface Machine {
 AdminName: string,
 Architecture: string,
@@ -47,4 +49,29 @@ OperatingSystem: string
 RAMCapacity: string
 RAMManufacturer: string
 Time: string
+}
+export interface SoftwareVersion{
+version:string,
+SoftwareId:number,
+SoftwareName
+}
+export interface Patches{
+PatchDescription:string,
+HotFixId:string
+}
+export interface Admins{
+  AdminName:string,
+  AdminId:number
+}
+export interface Users{
+  UserName:string
+}
+
+export interface MachineDetails{
+Machine:Machine,
+SoftwareVersion:SoftwareVersion[],
+Users:Users[],
+Patches:Patches[],
+Admins:Admins[]
+
 }

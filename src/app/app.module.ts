@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MachineTableComponent } from './machine-table/machine-table.component';
 import { MatTableModule } from '@angular/material';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +19,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatCardModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

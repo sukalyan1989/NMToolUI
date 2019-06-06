@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 
 import { MatTableDataSource } from "@angular/material/table";
-import { MachinesService, Machine } from "../machines.service";
+import { MachinesService, Machine,MachineDetails } from "../machines.service";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: "app-machine-table",
@@ -9,27 +10,34 @@ import { MachinesService, Machine } from "../machines.service";
   styleUrls: ["./machine-table.component.css"]
 })
 export class MachineTableComponent implements OnInit {
-  displayedColumns: string[] = ["Computer Name", "IP Address", "Date"];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  
+   displayedColumns: string[] = ["Computer Name", "IP Address", "Date"];
+  dataSource = [];
+  machineInfo$ : Observable<MachineDetails>;
+ renderFlag:boolean=false;
+ 
+
   constructor(private m: MachinesService) {
     this.m.getAllMachines().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-     
+      console.log(data);
+      this.dataSource=data;
+
     });
   }
 
-  ngOnInit() {
-    
+  fetchMachineDetails(id:number){
+this.machineInfo$=this.m.getMachineById(id);
+this.machineInfo$.subscribe(data=>{
+  this.renderFlag=true;
+})
+
   }
   
 
-  public selectRow(row) {
-    console.log(row.MachineId);
-    this.m.getMachineById(row.MachineId).subscribe(data => {
-      console.log(data);
-    });
-  }
-}
 
-const ELEMENT_DATA: Machine[] = [];
+  
+  
+   ngOnInit() {
+    };
+  }
+
+
