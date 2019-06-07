@@ -4,19 +4,19 @@
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
       
-        <!-- Position Column -->
+        <!-- ComputerName Column -->
         <ng-container matColumnDef="Computer Name">
           <th mat-header-cell *matHeaderCellDef> Computer Name. </th>
           <td mat-cell *matCellDef="let element"> {{element.ComputerName}} </td>
         </ng-container>
       
-        <!-- Name Column -->
+        <!-- IP Address Column -->
         <ng-container matColumnDef="IP Address">
           <th mat-header-cell *matHeaderCellDef> IP Address </th>
           <td mat-cell *matCellDef="let element"> {{element.IPAddress}} </td>
         </ng-container>
       
-        <!-- Weight Column -->
+        <!-- Date Column -->
         <ng-container matColumnDef="Date">
           <th mat-header-cell *matHeaderCellDef> Date </th>
           <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
@@ -34,106 +34,105 @@
 
             <div class="container-fluid">
       
-            
+            <!-- Machine Information goes here -->
           
+            <div class="row">
+              <div class="col-xl-12 col-sm-12 mb-3">
+                <div class="card o-hidden h-100">
+                  <div class="card-body">                
+                    <div class="card-header bg-primary">
+<div class="row">
+  <div class="col-md-4"><h5>{{machineInfo.ComputerName}}</h5></div>
+  <div class="col-md-4 text-center"><h5 class="pull-right">{{machineInfo.LoggedInUser}}</h5></div>
+  <div class="col-md-4 text-right"><h5 class="">{{machineInfo.Date}}</h5></div>
+</div>
+                        
+                      
+                        
+                  </div>
+                  </div>
+                  <div class="card-footer text-black clearfix small z-1" >
+                      <div class="row">
+
+                          <!-- First Card -->
+                           <div class="col-md-3">
+                               <mat-card>
+                                       <mat-card-title>
+                                           Computer Details 
+                                   </mat-card-title>
+                                   <mat-card-subtitle>
+                                      <b> CPU Name :</b> <br>
+                                      {{machineInfo.CPUName}}
+                                   </mat-card-subtitle>
+                                   <mat-card-subtitle>
+                                          <b> Architecture :</b> <br>
+                                          {{machineInfo.Architecture}}
+                                       </mat-card-subtitle>
+                                 
+                               </mat-card>
+                           </div> 
+                             <!-- SecondCard  -->
+                           <div class="col-md-3">
+                                   <mat-card>
+                                           <mat-card-title>
+                                               Memory Details 
+                                       </mat-card-title>
+                                       <mat-card-subtitle>
+                                              <b> RAM :</b> <br>
+                                              ({{machineInfo.RAMCapacity}}) GB 
+                                           </mat-card-subtitle>
+                                           <mat-card-subtitle>
+                                                  <b> HDD :</b> <br>
+                                                  {{machineInfo.HDDFreeSpace}}/{{machineInfo.HDDSize}} GB
+                                               </mat-card-subtitle>
+                                   </mat-card>
+       
+                               </div> 
+                                       <!-- Third Card  -->
+                           <div class="col-md-3">
+                                  <mat-card>
+                                          <mat-card-title>
+                                              Operating System 
+                                      </mat-card-title>
+                                      <mat-card-subtitle>
+                                              <b> OS :</b> <br>
+                                              {{machineInfo.OperatingSystem}}
+                                           </mat-card-subtitle>
+                                           <mat-card-subtitle>
+                                                  <b> Build Version :</b> <br>
+                                                  {{machineInfo.OSBuildVersion}}
+                                               </mat-card-subtitle>
+                                  </mat-card>
       
-              <!-- DataTables Example -->
- 
+                              </div> 
+                                      <!-- Fourth card  -->
+                           <div class="col-md-3">
+                                  <mat-card>
+                                          <mat-card-title>
+                                              Network Info 
+                                      </mat-card-title>
+                                      <mat-card-subtitle>
+                                              <b>IP Address :</b> <br>
+                                              {{machineInfo.IPAddress}}
+                                           </mat-card-subtitle>
+                                           <mat-card-subtitle>
+                                                  <b> Domain :</b> <br>
+                                                  {{machineInfo.Domain}}
+                                               </mat-card-subtitle>
+                                  </mat-card>
+      
+                              </div> 
+                      </div>
+
+                  </div>
+                </div>
+     </div>
+             </div>
+             <!-- Machine Information Goes here -->
       
      
       
-      <div class="row">
-                <div class="col-xl-12 col-sm-12 mb-3">
-                  <div class="card o-hidden h-100">
-                    <div class="card-body">                
-                      <div class="card-header bg-primary">
-<div class="row">
-    <div class="col-md-4"><h5>{{(machineInfo$|async)?.Machine.ComputerName}}</h5></div>
-    <div class="col-md-4 text-center"><h5 class="pull-right">{{(machineInfo$|async)?.Machine.LoggedInUser}}</h5></div>
-    <div class="col-md-4 text-right"><h5 class="">{{(machineInfo$|async)?.Machine.Date}}</h5></div>
-</div>
-                          
-                        
-                          
-                    </div>
-                    </div>
-                    <div class="card-footer text-black clearfix small z-1" >
-                        <div class="row">
 
-                            <!-- First Card -->
-                             <div class="col-md-3">
-                                 <mat-card>
-                                         <mat-card-title>
-                                             Computer Details 
-                                     </mat-card-title>
-                                     <mat-card-subtitle>
-                                        <b> CPU Name :</b> <br>
-                                        {{(machineInfo$|async)?.Machine.CPUName}}
-                                     </mat-card-subtitle>
-                                     <mat-card-subtitle>
-                                            <b> Architecture :</b> <br>
-                                            {{(machineInfo$|async)?.Machine.Architecture}}
-                                         </mat-card-subtitle>
-                                   
-                                 </mat-card>
-                             </div> 
-                               <!-- SecondCard  -->
-                             <div class="col-md-3">
-                                     <mat-card>
-                                             <mat-card-title>
-                                                 Memory Details 
-                                         </mat-card-title>
-                                         <mat-card-subtitle>
-                                                <b> RAM :</b> <br>
-                                                ({{(machineInfo$|async)?.Machine.RAMCapacity}}) GB 
-                                             </mat-card-subtitle>
-                                             <mat-card-subtitle>
-                                                    <b> HDD :</b> <br>
-                                                    {{(machineInfo$|async)?.Machine.HDDFreeSpace}}/{{(machineInfo$|async)?.Machine.HDDSize}} GB
-                                                 </mat-card-subtitle>
-                                     </mat-card>
-         
-                                 </div> 
-                                         <!-- Third Card  -->
-                             <div class="col-md-3">
-                                    <mat-card>
-                                            <mat-card-title>
-                                                Operating System 
-                                        </mat-card-title>
-                                        <mat-card-subtitle>
-                                                <b> OS :</b> <br>
-                                                {{(machineInfo$|async)?.Machine.OperatingSystem}}
-                                             </mat-card-subtitle>
-                                             <mat-card-subtitle>
-                                                    <b> Build Version :</b> <br>
-                                                    {{(machineInfo$|async)?.Machine.OSBuildVersion}}
-                                                 </mat-card-subtitle>
-                                    </mat-card>
-        
-                                </div> 
-                                        <!-- Fourth card  -->
-                             <div class="col-md-3">
-                                    <mat-card>
-                                            <mat-card-title>
-                                                Network Info 
-                                        </mat-card-title>
-                                        <mat-card-subtitle>
-                                                <b>IP Address :</b> <br>
-                                                {{(machineInfo$|async)?.Machine.IPAddress}}
-                                             </mat-card-subtitle>
-                                             <mat-card-subtitle>
-                                                    <b> Domain :</b> <br>
-                                                    {{(machineInfo$|async)?.Machine.Domain}}
-                                                 </mat-card-subtitle>
-                                    </mat-card>
-        
-                                </div> 
-                        </div>
-
-                    </div>
-                  </div>
-       </div>
-               </div>
       &nbsp;
       
        <div class="row">
@@ -141,43 +140,77 @@
                   <div class="card o-hidden h-100">
                     <div class="card-body">                
                       <div class="card-header"><h5>User</h5></div>
+                      <table class="table">
+                        <tr>
+                          <th>User Name</th>
+                        </tr>
+                        <tr *ngFor="let user of usersInfo">
+                         <td>{{user.UserName}}</td>
+                         </tr>
+                      </table>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#">
                     
-                    </a>
                   </div>
                 </div>
                 <div class="col-xl-4 col-sm-6 mb-3">
                   <div class="card o-hidden h-100">
                     <div class="card-body">
                     <div class="card-header"><h5>Admin</h5></div>
+                   <table class="table">
+                     <tr>
+                       <th>Admin Name</th>
+                     </tr>
+                     <tr *ngFor="let admin of adminsInfo">
+                      <td>{{admin.AdminName}}</td>
+                      </tr>
+                   </table>
+
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#">
                    
-                    </a>
                   </div>
                 </div>
                 <div class="col-xl-4 col-sm-6 mb-3">
                   <div class="card o-hidden h-100">
                     <div class="card-body">
                       <div class="card-header"><h5>Patches</h5></div>
+                      <table class="table">
+                        <tr>
+                          <th>Patch Name</th>
+                          <th>HotFix Id</th>
+                        </tr>
+                        <tr *ngFor="let patch of patchesInfo">
+                          <td>{{patch.PatchDescription}}</td>
+                          <td>{{patch.HotFixId}}</td>
+                        </tr>
+                      </table>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="#">
-                    
-                    </a>
+                   
                   </div>
                 </div>         
               </div>
       
       <div class="row">
       
-      <div class="col-md-2"></div>
-              <div class="col-md-8">
-      <h3 class="text-center">Software Information</h3><br>
       
+              <div class="col-md-12">
+      <h3 class="text-center">Software Information</h3><br>
+      <table class="table">
+        <tr>
+          <th>
+            Software Name
+          </th>
+          <th>
+            Version
+          </th>
+        </tr>
+        <tr *ngFor="let soft of softwareInfo">
+          <td>{{soft.SoftwareName}}</td>
+          <td>{{soft.version}}</td>
+        </tr>
+      </table>
         
       </div>
-      <div class="col-md-2"></div>
+      
       </div>
             </div>
            

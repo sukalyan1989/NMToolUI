@@ -53,7 +53,7 @@ Time: string
 export interface SoftwareVersion{
 version:string,
 SoftwareId:number,
-SoftwareName
+SoftwareName:string
 }
 export interface Patches{
 PatchDescription:string,
