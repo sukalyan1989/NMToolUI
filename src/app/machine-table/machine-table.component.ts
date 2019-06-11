@@ -19,6 +19,7 @@ export class MachineTableComponent implements OnInit,OnDestroy {
  patchesInfo:Patches[];
  usersInfo:Users[];
  adminsInfo:Admins[];
+ searchStr:string;
 
   constructor(private m: MachinesService) {
     this.m.getAllMachines().subscribe(data => {
@@ -26,6 +27,20 @@ export class MachineTableComponent implements OnInit,OnDestroy {
       this.dataSource=data;
 
     });
+  }
+
+  handleSearchString(event:{target:HTMLInputElement}):void{
+this.searchStr=event.target.value;
+
+  }
+  filterSearch():void{
+    if(this.searchStr){
+      this.m.getMachineBySearchString(this.searchStr).subscribe(data=>{this.dataSource=data;console.log(data)});
+    }
+    else{
+      this.m.getAllMachines().subscribe(data => {this.dataSource=data;console.log(data)})
+    }
+    
   }
 
   fetchMachineDetails(id:number){

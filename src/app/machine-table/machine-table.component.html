@@ -1,4 +1,7 @@
 <div class="container">
+  <input type="text" (keyup)="handleSearchString($event)"/> <button (click)="filterSearch()">Search</button>
+</div>
+<div class="container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width:100%">
     
         <!--- Note that these columns can be defined in any order.

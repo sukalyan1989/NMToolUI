@@ -29,6 +29,15 @@ export class MachinesService {
   }).pipe(map(n =>{ return n;}))
 
   }
+
+  public getMachineBySearchString(str:string):Observable<Machine[]>{
+    return this.http.get<Machine[]>("http://localhost:64689/api/Machine?name="+str,{
+      headers: new HttpHeaders({
+        Accept: "application/json;odata=verbose",
+      })
+    }).pipe(map(n =>{ return n;}))
+  
+  }
 }
 
 
