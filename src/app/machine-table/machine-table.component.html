@@ -1,8 +1,24 @@
-<div class="container">
-  <input type="text" (keyup)="handleSearchString($event)"/> <button (click)="filterSearch()">Search</button>
+<div class="loader"  *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="container text-center" style="padding:20px">
+    <h4 class="display-4">Machine Information Page</h4>
+  
+     <!-- <input type="text" placeholder="Enter Search Keyword..." (keyup)="handleSearchString($event)" class="form-control form-control-lg"/> <button (click)="filterSearch()" class="btn btn-primary btn-lg form-control" style="margin-top:20px">Search</button> -->
+     
+     <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Search</span>
+        </div>
+        <input type="text" class="form-control form-control-lg" (keyup)="handleSearchString($event)">
+        <div class="input-group-append">
+            <button class="btn btn-primary btn-lg" (click)="filterSearch()">GO</button>
+          </div>
+      
+      </div>
 </div>
 <div class="container">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width:100%">
+    <table *ngIf="dataSource.length" mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width:100%">
     
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -30,24 +46,31 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="fetchMachineDetails(row.MachineId)"></tr>
       </table>
+     
+      <div class="text-center mat-elevation-z8" style="" *ngIf="!dataSource.length && !isLoading">
+        <p class="text-muted display-4">Sorry No Matches ..</p>
+
+      </div>
+
+      
 
       <br>
       <br>
       <div id="content-wrapper" *ngIf="renderFlag">
 
-            <div class="container-fluid">
+            <div class="container-fluid ">
       
             <!-- Machine Information goes here -->
           
             <div class="row">
               <div class="col-xl-12 col-sm-12 mb-3">
-                <div class="card o-hidden h-100">
+                <div class="card o-hidden h-100 mat-elevation-z8">
                   <div class="card-body">                
                     <div class="card-header bg-primary">
 <div class="row">
-  <div class="col-md-4"><h5>{{machineInfo.ComputerName}}</h5></div>
-  <div class="col-md-4 text-center"><h5 class="pull-right">{{machineInfo.LoggedInUser}}</h5></div>
-  <div class="col-md-4 text-right"><h5 class="">{{machineInfo.Date}}</h5></div>
+  <div class="col-md-4"><h5 class="txtwhite">{{machineInfo.ComputerName}}</h5></div>
+  <div class="col-md-4 text-center"><h5 class="pull-right txtwhite">{{machineInfo.LoggedInUser}}</h5></div>
+  <div class="col-md-4 text-right"><h5 class="txtwhite">{{machineInfo.Date}}</h5></div>
 </div>
                         
                       
@@ -140,9 +163,9 @@
       
        <div class="row">
                 <div class="col-xl-4 col-sm-6 mb-3">
-                  <div class="card o-hidden h-100">
+                  <div class="card o-hidden h-100 mat-elevation-z8">
                     <div class="card-body">                
-                      <div class="card-header"><h5>User</h5></div>
+                      <div class="card-header bg-primary"><h5 class=" txtwhite display-4" style="font-size: 36px">User</h5></div>
                       <table class="table">
                         <tr>
                           <th>User Name</th>
@@ -156,9 +179,9 @@
                   </div>
                 </div>
                 <div class="col-xl-4 col-sm-6 mb-3">
-                  <div class="card o-hidden h-100">
+                  <div class="card o-hidden h-100 mat-elevation-z8">
                     <div class="card-body">
-                    <div class="card-header"><h5>Admin</h5></div>
+                    <div class="card-header bg-primary"><h5 class=" txtwhite display-4" style="font-size:36px">Admin</h5></div>
                    <table class="table">
                      <tr>
                        <th>Admin Name</th>
@@ -173,9 +196,9 @@
                   </div>
                 </div>
                 <div class="col-xl-4 col-sm-6 mb-3">
-                  <div class="card o-hidden h-100">
+                  <div class="card o-hidden h-100 mat-elevation-z8">
                     <div class="card-body">
-                      <div class="card-header"><h5>Patches</h5></div>
+                      <div class="card-header bg-primary"><h5  style="font-size:36px"  class="txtwhite display-4 font-weight-light">Patches</h5></div>
                       <table class="table">
                         <tr>
                           <th>Patch Name</th>
@@ -192,29 +215,41 @@
                 </div>         
               </div>
       
-      <div class="row">
-      
-      
-              <div class="col-md-12">
-      <h3 class="text-center">Software Information</h3><br>
-      <table class="table">
-        <tr>
-          <th>
-            Software Name
-          </th>
-          <th>
-            Version
-          </th>
-        </tr>
-        <tr *ngFor="let soft of softwareInfo">
-          <td>{{soft.SoftwareName}}</td>
-          <td>{{soft.version}}</td>
-        </tr>
-      </table>
-        
-      </div>
-      
-      </div>
+     <br>
+     <!-- Software Table  -->
+      <div class="col-md-12 mb-3">
+          <div class="card o-hidden h-100 mat-elevation-z8">
+            <div class="card-body">
+              <div class="card-header text-center bg-primary"><h5 class="display-4 txtwhite">Software Information</h5></div>
+              <table class="table">
+                  <tr>
+                      <th>
+                        Software Name
+                      </th>
+                      <th>
+                        Version
+                      </th>
+                    </tr>
+                    <tr *ngFor="let soft of softwareInfo">
+                      <td>{{soft.SoftwareName}}</td>
+                      <td>{{soft.version}}</td>
+                    </tr>
+              </table>
+            </div>
+           
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
             </div>
            
             

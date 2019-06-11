@@ -20,39 +20,51 @@ export class MachineTableComponent implements OnInit,OnDestroy {
  usersInfo:Users[];
  adminsInfo:Admins[];
  searchStr:string;
+ isLoading:boolean=true;
+ 
 
   constructor(private m: MachinesService) {
     this.m.getAllMachines().subscribe(data => {
-      console.log(data);
+      //console.log(data);
       this.dataSource=data;
+      this.isLoading=false;
 
     });
   }
 
+  //function to retrieve searchstring 
   handleSearchString(event:{target:HTMLInputElement}):void{
-this.searchStr=event.target.value;
+  this.searchStr=event.target.value;
 
   }
+
+  //function for search handling 
   filterSearch():void{
+
     if(this.searchStr){
-      this.m.getMachineBySearchString(this.searchStr).subscribe(data=>{this.dataSource=data;console.log(data)});
+      this.isLoading=true;
+      this.m.getMachineBySearchString(this.searchStr).subscribe(data=>{this.dataSource=data;this.isLoading=false;this.renderFlag=false});
+      
     }
     else{
-      this.m.getAllMachines().subscribe(data => {this.dataSource=data;console.log(data)})
+      this.isLoading=true;
+      this.m.getAllMachines().subscribe(data => {this.dataSource=data;this.isLoading=false})
     }
     
   }
 
+  //function to fetch individual machine Details to be activated by clicking on row
   fetchMachineDetails(id:number){
-this.machineInfo$=this.m.getMachineById(id);
-this.machineInfo$.subscribe(data=>{
+    this.isLoading=true;
+  this.machineInfo$=this.m.getMachineById(id);
+  this.machineInfo$.subscribe(data=>{
   this.machineInfo=data.Machine;
   this.softwareInfo=[...data.SoftwareVersion];
   this.patchesInfo=[...data.Patches];
   this.adminsInfo=[...data.Admins];
   this.usersInfo=[...data.Users];
   this.renderFlag=true;
-  
+  this.isLoading=false;
 })
 
   }
@@ -61,6 +73,7 @@ this.machineInfo$.subscribe(data=>{
     };
     ngOnDestroy(){
       this.renderFlag=false;
+    
     }
   }
 

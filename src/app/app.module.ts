@@ -9,6 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MachineTableComponent } from './machine-table/machine-table.component';
 import { MatTableModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +23,9 @@ import {MatCardModule} from '@angular/material/card';
     HttpClientModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule,
+    
   
   ],
   providers: [],
