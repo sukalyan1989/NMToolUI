@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
   templateUrl: "./machine-table.component.html",
   styleUrls: ["./machine-table.component.css"]
 })
+
+
 export class MachineTableComponent implements OnInit,OnDestroy {
    displayedColumns: string[] = ["Computer Name", "IP Address", "Date"];
   dataSource = [];
